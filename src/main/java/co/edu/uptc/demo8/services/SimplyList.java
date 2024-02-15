@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import org.apache.poi.ss.formula.functions.T;
 
+@SuppressWarnings("hiding")
 public class SimplyList<T> implements List<T> {
 
     private Node<T> header = null;
@@ -28,6 +29,12 @@ public class SimplyList<T> implements List<T> {
     }
 
     @Override
+    public void add(int index, T element) {
+        Node<T> temp = new Node<>();
+        temp.setInfo(element);
+    }
+
+    @Override
     public int size() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'size'");
@@ -35,8 +42,7 @@ public class SimplyList<T> implements List<T> {
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return (header == null);
     }
 
     @Override
@@ -61,12 +67,6 @@ public class SimplyList<T> implements List<T> {
     public <T> T[] toArray(T[] a) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
     }
 
     @Override
@@ -117,28 +117,36 @@ public class SimplyList<T> implements List<T> {
     }
 
     @Override
-    public void add(int index, T element) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
-    }
-
-    @Override
     public T remove(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
         Node<T> temp = header;
         if (index == 0) {
-            if (header == footer) {
-                header = null;
+            T removedValue = header.getInfo();
+            header = header.getNext();
+            if (header == null) {
                 footer = null;
             }
-            header = header.getNext();
-
+            return removedValue;
         } else {
             for (int i = 0; i < index - 1; i++) {
                 temp = temp.getNext();
             }
-            temp.setNext(temp);
+            T removedValue = temp.getNext().getInfo();
+            temp.setNext(temp.getNext().getNext());
+            if (temp.getNext() == null) {
+                footer = temp; // Update the footer if the last node is removed
+            }
+            return removedValue;
         }
-        return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remove'");
     }
 
     @Override

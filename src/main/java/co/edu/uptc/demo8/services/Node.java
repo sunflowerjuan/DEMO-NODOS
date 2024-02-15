@@ -2,6 +2,7 @@ package co.edu.uptc.demo8.services;
 
 import org.apache.poi.ss.formula.functions.T;
 
+@SuppressWarnings("hiding")
 public class Node<T> {
     private T info;
     private Node<T> next;
