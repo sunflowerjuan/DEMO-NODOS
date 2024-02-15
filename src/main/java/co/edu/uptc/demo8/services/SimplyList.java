@@ -30,14 +30,31 @@ public class SimplyList<T> implements List<T> {
 
     @Override
     public void add(int index, T element) {
-        Node<T> temp = new Node<>();
-        temp.setInfo(element);
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+        if (size() == 1) {
+            add(element);
+        }
+        Node<T> temp = header;
+        for (int i = 0; i < index - 1; i++) {
+            temp = temp.getNext();
+        }
+        temp.setNext(new Node<T>(element, temp.getNext()));
+
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        if (isEmpty())
+            return 0;
+        Node<T> nodeTemp = header;
+        int counter = 0;
+        while (nodeTemp.getNext() != null) {
+            counter++;
+            nodeTemp = nodeTemp.getNext();
+        }
+        return counter;
     }
 
     @Override
@@ -47,8 +64,7 @@ public class SimplyList<T> implements List<T> {
 
     @Override
     public boolean contains(Object o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
     }
 
     @Override
@@ -107,7 +123,7 @@ public class SimplyList<T> implements List<T> {
     @Override
     public T get(int index) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        throw new UnsupportedOperationException("Unimplemented method 'set'");
     }
 
     @Override
@@ -177,5 +193,21 @@ public class SimplyList<T> implements List<T> {
     public List<T> subList(int fromIndex, int toIndex) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'subList'");
+    }
+
+    public Node<T> getHeader() {
+        return header;
+    }
+
+    public void setHeader(Node<T> header) {
+        this.header = header;
+    }
+
+    public Node<T> getFooter() {
+        return footer;
+    }
+
+    public void setFooter(Node<T> footer) {
+        this.footer = footer;
     }
 }

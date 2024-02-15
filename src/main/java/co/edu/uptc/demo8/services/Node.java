@@ -7,6 +7,11 @@ public class Node<T> {
     private T info;
     private Node<T> next;
 
+    public Node(T info, Node<T> next) {
+        this.info = info;
+        this.next = next;
+    }
+
     public Node() {
         next = null;
     }
