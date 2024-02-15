@@ -11,12 +11,14 @@ import co.edu.uptc.demo8.services.SimplyList;
 public class SimpleList {
 
     @GetMapping("/demo1")
-    public void demoList() {
+    public String demoList() {
         SimplyList simply = new SimplyList();
         simply.add("info");
         simply.add("info");
         simply.add("info");
         simply.add("info");
         simply.add("info");
+        System.out.println("test exitoso");
+        return "TEST EXITOSO";
     }
 }
