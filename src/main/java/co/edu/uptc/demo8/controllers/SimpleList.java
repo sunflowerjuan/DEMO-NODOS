@@ -55,13 +55,15 @@ public class SimpleList {
             System.out.println(temp.getInfo() + "");
             temp = temp.getNext();
         }
-        simply.add(3, "6");
+        System.out.println(simply.size() + ": tamano");
+        simply.add(4, "6");
         temp = simply.getHeader();
         System.out.println("---------------------");
         for (int i = 0; i < 6; i++) {
             System.out.println(temp.getInfo() + "");
             temp = temp.getNext();
         }
+        System.out.println(simply.size() + ": tamano");
         System.out.println("test exitoso");
         return "TEST EXITOSO";
 

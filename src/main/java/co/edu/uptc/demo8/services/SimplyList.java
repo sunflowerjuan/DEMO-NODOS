@@ -12,6 +12,7 @@ public class SimplyList<T> implements List<T> {
 
     private Node<T> header = null;
     private Node<T> footer = null;
+    private int size = 0;
 
     public boolean add(T info) {
 
@@ -21,11 +22,13 @@ public class SimplyList<T> implements List<T> {
         if (header == null) {
             header = tempNode;
             footer = header;
+            size++;
         } else {
             footer.setNext(tempNode);
             footer = tempNode;
+            size++;
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -35,26 +38,20 @@ public class SimplyList<T> implements List<T> {
         }
         if (size() == 1) {
             add(element);
+
         }
         Node<T> temp = header;
         for (int i = 0; i < index - 1; i++) {
             temp = temp.getNext();
         }
         temp.setNext(new Node<T>(element, temp.getNext()));
+        size++;
 
     }
 
     @Override
     public int size() {
-        if (isEmpty())
-            return 0;
-        Node<T> nodeTemp = header;
-        int counter = 0;
-        while (nodeTemp.getNext() != null) {
-            counter++;
-            nodeTemp = nodeTemp.getNext();
-        }
-        return counter;
+        return size;
     }
 
     @Override
